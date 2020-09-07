@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=kickstart
+POSTGRES_USER=DVoccPfQuTRRiaSckbsLvvlKdlejtLLc
+POSTGRES_PASSWORD=lec34Tk6IRVLjoCgq5ws1GXc6QTP4ZPJDeFKcVNe1k7PmPRdxKo0A42GJmF79KJP
