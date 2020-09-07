@@ -14,6 +14,12 @@ lint:  ## Run linting
 migrate: docker  ## Run migration
 	docker-compose -f ${COMPOSE_FILE} run --rm django python manage.py migrate
 
+makemigrations: docker  ## Run migration
+	docker-compose -f ${COMPOSE_FILE} run --rm django python manage.py makemigrations
+
+createsuperuser: docker  ## Create superuser
+	docker-compose -f ${COMPOSE_FILE} run --rm django python manage.py createsuperuser
+
 test: docker  ## Run unit tests and produce coverage report
 	docker-compose -f local.yml run --rm django coverage run -m pytest
 	docker-compose -f local.yml run --rm django coverage report
