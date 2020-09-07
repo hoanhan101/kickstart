@@ -83,7 +83,11 @@
       {% endif %}
 
       {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
+        {% if request.user.is_authenticated %}
+            <p>Authenticated for {{ request.user.get_username }}</p>
+        {% else %}
+            <p>Not authenticated</p>
+        {% endif %}
       {% endblock content %}
 
     </div> <!-- /container -->
