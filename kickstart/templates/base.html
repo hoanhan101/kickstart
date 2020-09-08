@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}Kickstart{% endblock title %}</title>
+    <title>{% block title %}Clear Goals{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kickstart projects faster">
+    <meta name="description" content="Set Goals You’ll Actually Follow">
     <meta name="author" content="Hoanh An">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -34,45 +34,56 @@
 
   <body>
 
-    <div class="mb-1">
-      <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <div class="container">
+        {% if request.user.is_authenticated %}
+            <a class="navbar-brand" href="{% url 'goals:goal_list' %}">Clear Goals</a>
+        {% else %}
+            <a class="navbar-brand" href="{% url 'home' %}">Clear Goals</a>
+        {% endif %}
+
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="{% url 'home' %}">Kickstart</a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
-            </li>
+          <ul class="navbar-nav mr-auto order-1">
             {% if request.user.is_authenticated %}
               <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
-              </li>
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
-              </li>
-            {% else %}
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
-              </li>
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
+                <a class="nav-link" href="{% url 'goals:goal_list' %}">{% trans "TODO" %}</a>
               </li>
             {% endif %}
           </ul>
-        </div>
-      </nav>
+          <ul class="navbar-nav order-3">
+            {% if request.user.is_authenticated %}
+                <div class="dropdown">
+                  <button class="btn dropdown-toggle text-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{ request.user.get_username }}
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% url 'users:detail' request.user.username  %}">{% trans "Profile" %}</a>
+                    <a class="dropdown-item" href="{% url 'account_logout' %}">{% trans "Sign out" %}</a>
+                  </div>
+                </div>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}">About</a>
+              </li>
+              <li class="nav-item">
+                {# URL provided by django-allauth/account/urls.py #}
+                <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Sign up" %}</a>
+              </li>
+              <li class="nav-item">
+                {# URL provided by django-allauth/account/urls.py #}
+                <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign in" %}</a>
+              </li>
+            {% endif %}
+          </ul>
 
-    </div>
+        </div>
+
+      </div>
+    </nav>
 
     <div class="container">
 

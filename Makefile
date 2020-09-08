@@ -14,7 +14,7 @@ lint:  ## Run linting
 migrate: docker  ## Run migration
 	docker-compose -f ${COMPOSE_FILE} run --rm django python manage.py migrate
 
-makemigrations: docker  ## Run migration
+makemigrations: docker  ## Run makemigrations
 	docker-compose -f ${COMPOSE_FILE} run --rm django python manage.py makemigrations
 
 createsuperuser: docker  ## Create superuser

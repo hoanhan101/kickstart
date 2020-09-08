@@ -17,6 +17,7 @@ urlpatterns = [
     path("users/", include("kickstart.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
+    path('goals/', include('kickstart.goals.urls', namespace='goals')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # API URLS
