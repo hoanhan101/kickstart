@@ -45,12 +45,29 @@
                     {% for g in payload %}
                         {% for s in g.systems %}
                             {% for p in s.progress %}
-                                {
-                                    title: '{{ p.system.name|safe }}',
-                                    start: '{{ p.date|safe }}',
-                                    end: '{{ p.date|safe }}',
-                                    color: '#{{ p.system.color|safe }}',
-                                },
+                                {% if p.is_completed %} 
+                                    {
+                                        {% if p.measurable_data is not none %} 
+                                            title: '{{ p.system.name|safe }} - {{ p.measurable_data|safe }} {{ p.system.measurable_unit|safe }}',
+                                        {% else %}
+                                            title: '{{ p.system.name|safe }}',
+                                        {% endif %}
+                                        start: '{{ p.date|safe }}',
+                                        end: '{{ p.date|safe }}',
+                                        color: '#{{ p.system.color|safe }}',
+                                    },
+                                {% else %}
+                                    {
+                                        {% if p.measurable_data is not none %} 
+                                            title: '{{ p.system.name|safe }} - {{ p.measurable_data|safe }} {{ p.system.measurable_unit|safe }}',
+                                        {% else %}
+                                            title: '{{ p.system.name|safe }}',
+                                        {% endif %}
+                                        start: '{{ p.date|safe }}',
+                                        end: '{{ p.date|safe }}',
+                                        color: '#6c757d',
+                                    },
+                                {% endif %}
                             {% endfor %}
                         {% endfor %}
                     {% endfor %}
