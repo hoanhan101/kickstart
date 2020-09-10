@@ -1,19 +1,51 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-    <h1>Goals</h1>
-    {% if goals|length < 1 %}
-        <p class="card-text">No goals yet</p>
-    {% endif %}
-    {% for goal in goals %}
-        <div class="col-md-4">
-            <div class="card mb-2">
-                <div class="card-body">
-                    <h5 class="card-title">{{ goal.user_of.get_username }}</h5>
-                    <h5 class="card-title">{{ goal.name }}</h5>
-                    <p class="card-text">{{ goal.is_completed }}</p>
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <h3>Goals</h3>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <h3>Systems</h3>
                 </div>
             </div>
         </div>
+
+        {% if payload|length < 1 %}
+        <div class="row">
+            <p>You haven't created any goal yet!</p>
+        </div>
+        {% endif %}
+
+        {% for g in payload %}
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <p style="font-size: 20px;">{{ g.goal }}</p>
+                </div>
+            </div>
+            <div class="col">
+                {% if g.systems|length < 1 %}
+                <div class="row">
+                    <p class="text-secondary">You haven't created any system yet!</p>
+                </div>
+                {% endif %}
+                {% for s in g.systems %}
+                <div class="row">
+                    <p style="font-size: 20px;">{{ s.system }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
         {% endfor %}
+
+    </div>
+
 {% endblock content %}
