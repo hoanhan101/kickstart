@@ -7,9 +7,11 @@ from .models import Goal, System, Progress
 class GoalAdmin(admin.ModelAdmin):
     list_display = ('user', 'name', 'is_completed', 'pain_level')
 
+
 @admin.register(System)
 class SystemAdmin(admin.ModelAdmin):
     list_display = ('goal', 'name', 'measurable_data', 'measurable_unit', 'measurable_context')
+
 
 @admin.register(Progress)
 class ProgressAdmin(admin.ModelAdmin):

@@ -15,6 +15,7 @@ class Goal(models.Model):
     def __str__(self):
         return f'{self.name}'
 
+
 class System(models.Model):
     goal = models.ForeignKey(Goal, on_delete=models.CASCADE, related_name='goal_of')
     name = models.CharField(max_length=200)
@@ -28,6 +29,7 @@ class System(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
 
 class Progress(models.Model):
     system = models.ForeignKey(System, on_delete=models.CASCADE, related_name='system_of')
