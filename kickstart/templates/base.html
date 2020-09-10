@@ -24,6 +24,7 @@
     <!-- Your stuff: Third-party CSS libraries go here -->
 
     <link href="{% static 'css/fontawesome.css' %}" rel="stylesheet">
+    <link href="{% static 'css/fullcalendar.css' %}" rel="stylesheet">
     
     <!-- This file stores project-specific CSS -->
     
@@ -131,13 +132,11 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
       <!-- Your stuff: Third-party javascript libraries go here -->
-      
-
+      <script src="{% static 'js/fullcalendar.js' %}"></script>
+  
       <!-- place project specific Javascript in this file -->
-      
       <script src="{% static 'js/project.js' %}"></script>
       
-
     {% endblock javascript %}
   </body>
 </html>

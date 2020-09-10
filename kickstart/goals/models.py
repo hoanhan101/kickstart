@@ -19,6 +19,7 @@ class Goal(models.Model):
 class System(models.Model):
     goal = models.ForeignKey(Goal, on_delete=models.CASCADE, related_name='goal_of')
     name = models.CharField(max_length=200)
+    color = models.CharField(max_length=6, null=True, blank=True)
     measurable_data = models.PositiveIntegerField(null=True, blank=True)
     measurable_unit = models.CharField(max_length=200, null=True, blank=True)
     measurable_context = models.TextField(null=True, blank=True)

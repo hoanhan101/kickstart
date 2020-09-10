@@ -1,9 +1,37 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block content %}
-    <br>
 
+
+{% block content %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                headerToolbar: { center: 'dayGridMonth,dayGridWeek' },
+                initialView: 'dayGridMonth',
+                events: [
+                    {% for g in payload %}
+                        {% for s in g.systems %}
+                        {
+                            title: '{{ s.system.name|safe }}',
+                            start: '2020-09-08',
+                            end: '2020-09-09',
+                            color: '#{{ s.system.color|safe }}',
+                        },
+                        {% endfor %}
+                    {% endfor %}
+                ]
+            });
+            calendar.render();
+        });
+    </script>
+
+    <br>
+    <div id='calendar'></div>
+
+    <br>
     <div class="container">
         <div class="row">
             <div class="col">
