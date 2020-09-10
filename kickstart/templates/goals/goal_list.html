@@ -17,7 +17,7 @@
         <p style="font-size: 20px;"><i class="fas fa-star"></i> Your goal is to <span class="badge badge-warning">{{ g.goal }}</span> <i class="fas fa-arrow-right"></i> Your system is to
 
         {% if g.systems|length < 1 %}
-            <span class="badge badge-warning">Define it here</span>
+            <span class="badge badge-warning">Click to define</span>
         {% endif %}
 
         {% if g.systems|length == 1 %}
@@ -50,7 +50,11 @@
                                         {% if p.measurable_data is not none %} 
                                             title: '{{ p.system.name|safe }} - {{ p.measurable_data|safe }} {{ p.system.measurable_unit|safe }}',
                                         {% else %}
-                                            title: '{{ p.system.name|safe }}',
+                                            {% if p.measurable_context|length %} 
+                                                title: '{{ p.measurable_context|safe }}',
+                                            {% else %}
+                                                title: '{{ p.system.name|safe }}',
+                                            {% endif %}
                                         {% endif %}
                                         start: '{{ p.date|safe }}',
                                         end: '{{ p.date|safe }}',
@@ -77,5 +81,31 @@
         });
     </script>
     <div id='calendar'></div>
+
+    <br>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['J', 'D'],
+                    datasets: [
+                        {
+                            label: 'hello1',
+                            data: [1, 2, 3, 4, 5],
+                        },
+                        {
+                            label: 'hello2',
+                            data: [2, 4, 6, 8, 10],
+                        },
+                    ],
+                },
+            });
+        });
+    </script>
+    <canvas id="myChart"></canvas>
 
 {% endblock content %}
