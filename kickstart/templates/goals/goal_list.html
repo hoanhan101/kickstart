@@ -5,6 +5,36 @@
 
 {% block content %}
 
+    <br>
+    <h3>Goals determine your direction. Systems determine your progress.</h3>
+    {% if payload|length < 1 %}
+    <div class="row">
+        <p class="text-secondary">You haven't created any goal yet!</p>
+    </div>
+    {% endif %}
+
+    {% for g in payload %}
+        <p style="font-size: 20px;"><i class="fas fa-star"></i> Your goal is to <span class="badge badge-warning">{{ g.goal }}</span> <i class="fas fa-arrow-right"></i> Your system is to
+
+        {% if g.systems|length < 1 %}
+            <span class="badge badge-warning">Define it here</span>
+        {% endif %}
+
+        {% if g.systems|length == 1 %}
+            <span style="background-color: #{{ g.systems.0.system.color }}" class="badge badge-warning">{{ g.systems.0.system }}</span>
+        {% endif %}
+
+        {% if g.systems|length > 1 %}
+            {% for s in g.systems %}
+                <span style="background-color: #{{ s.system.color }}" class="badge badge-warning">{{ s.system }}</span>
+            {% endfor %}
+        {% endif %}
+
+        </p>
+    {% endfor %}
+
+    <br>
+    <h3>Use this calendar to measure your progress. Try not to break the chain.</h3>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
@@ -14,12 +44,14 @@
                 events: [
                     {% for g in payload %}
                         {% for s in g.systems %}
-                        {
-                            title: '{{ s.system.name|safe }}',
-                            start: '2020-09-08',
-                            end: '2020-09-09',
-                            color: '#{{ s.system.color|safe }}',
-                        },
+                            {% for p in s.progress %}
+                                {
+                                    title: '{{ p.system.name|safe }}',
+                                    start: '{{ p.date|safe }}',
+                                    end: '{{ p.date|safe }}',
+                                    color: '#{{ p.system.color|safe }}',
+                                },
+                            {% endfor %}
                         {% endfor %}
                     {% endfor %}
                 ]
@@ -27,53 +59,6 @@
             calendar.render();
         });
     </script>
-
-    <br>
     <div id='calendar'></div>
-
-    <br>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="row">
-                    <h3>Goals</h3>
-                </div>
-            </div>
-            <div class="col">
-                <div class="row">
-                    <h3>Systems</h3>
-                </div>
-            </div>
-        </div>
-
-        {% if payload|length < 1 %}
-        <div class="row">
-            <p>You haven't created any goal yet!</p>
-        </div>
-        {% endif %}
-
-        {% for g in payload %}
-        <div class="row">
-            <div class="col">
-                <div class="row">
-                    <p style="font-size: 20px;">{{ g.goal }}</p>
-                </div>
-            </div>
-            <div class="col">
-                {% if g.systems|length < 1 %}
-                <div class="row">
-                    <p class="text-secondary">You haven't created any system yet!</p>
-                </div>
-                {% endif %}
-                {% for s in g.systems %}
-                <div class="row">
-                    <p style="font-size: 20px;">{{ s.system }}</p>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% endfor %}
-
-    </div>
 
 {% endblock content %}

@@ -17,3 +17,7 @@
     padding: 0 1px;
     white-space: normal;
 }
+
+.navbar-brand {
+    font-size: 2rem;
+}
