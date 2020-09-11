@@ -34,7 +34,8 @@
     {% endfor %}
 
     <br>
-    <h3>Use this calendar to measure your progress. Try not to break the chain.</h3>
+    <h3>Try not to break the chain.</h3>
+    <h4>Calendar View</h4>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
@@ -51,7 +52,7 @@
                                             title: '{{ p.system.name|safe }} - {{ p.measurable_data|safe }} {{ p.system.measurable_unit|safe }}',
                                         {% else %}
                                             {% if p.measurable_context|length %} 
-                                                title: '{{ p.measurable_context|safe }}',
+                                            title: '{{ p.measurable_context|safe }}',
                                             {% else %}
                                                 title: '{{ p.system.name|safe }}',
                                             {% endif %}
@@ -83,29 +84,53 @@
     <div id='calendar'></div>
 
     <br>
-
-
+    <h4>Chart View</h4>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var ctx = document.getElementById('myChart').getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['J', 'D'],
                     datasets: [
-                        {
-                            label: 'hello1',
-                            data: [1, 2, 3, 4, 5],
-                        },
-                        {
-                            label: 'hello2',
-                            data: [2, 4, 6, 8, 10],
-                        },
+                        {% for g in payload %}
+                            {% for s in g.systems %}
+                                {
+                                    {% if s.system.measurable_unit|length %} 
+                                        label: '{{ s.system.name|safe }} ({{ s.system.measurable_unit|safe }})',
+                                    {% else %}
+                                        label: '{{ s.system.name|safe }}',
+                                    {% endif %}
+                                    borderColor: '#{{ s.system.color|safe }}',
+                                    borderWidth: 1.5,
+                                    fill: false,
+                                    data: [
+                                        {% for p in s.progress %}
+                                            {% if p.measurable_data is not none %} 
+                                                { x: '{{ p.date|safe }}', y: '{{ p.measurable_data|safe }}' },
+                                            {% else %}
+                                                { x: '{{ p.date|safe }}', y: 0 },
+                                            {% endif %}
+                                        {% endfor %}
+                                    ],
+                                },
+                            {% endfor %}
+                        {% endfor %}
                     ],
+                },
+                options: {
+                    scales: {
+                        xAxes: [
+                            {
+                                type: 'time',
+                                distribution: "series",
+                            },
+                        ],
+                    },
                 },
             });
         });
     </script>
     <canvas id="myChart"></canvas>
+
 
 {% endblock content %}
