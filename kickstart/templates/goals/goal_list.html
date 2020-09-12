@@ -17,16 +17,16 @@
         <p style="font-size: 20px;"><i class="fas fa-star"></i> Your goal is to <span class="badge badge-warning">{{ g.goal }}</span> <i class="fas fa-arrow-right"></i> Your system is to
 
         {% if g.systems|length < 1 %}
-            <span class="badge badge-warning">Click to define</span>
+            <span style="background-color: {{ g.systems.0.system.color }}" class="badge badge-warning">Click to define</span>
         {% endif %}
 
         {% if g.systems|length == 1 %}
-            <span style="background-color: #{{ g.systems.0.system.color }}" class="badge badge-warning">{{ g.systems.0.system }}</span>
+            <span style="background-color: {{ g.systems.0.system.color }}" class="badge badge-warning">{{ g.systems.0.system }}</span>
         {% endif %}
 
         {% if g.systems|length > 1 %}
             {% for s in g.systems %}
-                <span style="background-color: #{{ s.system.color }}" class="badge badge-warning">{{ s.system }}</span>
+                <span style="background-color: {{ s.system.color }}" class="badge badge-warning">{{ s.system }}</span>
             {% endfor %}
         {% endif %}
 
@@ -61,7 +61,7 @@
                                         {% endif %}
                                         start: '{{ p.date|safe }}',
                                         end: '{{ p.date|safe }}',
-                                        color: '#{{ p.system.color|safe }}',
+                                        color: '{{ p.system.color|safe }}',
                                     },
                                 {% else %}
                                     {
@@ -86,7 +86,7 @@
     <div id='calendar'></div>
 
     <br>
-    <h3> Use concrete numbers to see if you are getting better or worse. </h3>
+    <h3> Use numbers to check if you are getting better. </h3>
     <p style="font-size: 20px;"><i class="fas fa-star"></i> Start with a version that is incredibly easy for you. </p>
     <p style="font-size: 20px;"><i class="fas fa-star"></i> Try to increase it each day, but in an incredibly small way. </p>
     <p style="font-size: 20px;"><i class="fas fa-star"></i> Getting 1% better each day results in 37 times better by the end of the year. </p>
@@ -106,7 +106,7 @@
                                     {% else %}
                                         label: '{{ s.system.name|safe }}',
                                     {% endif %}
-                                    borderColor: '#{{ s.system.color|safe }}',
+                                    borderColor: '{{ s.system.color|safe }}',
                                     borderWidth: 1.5,
                                     fill: false,
                                     data: [

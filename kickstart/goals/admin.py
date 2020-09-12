@@ -10,7 +10,7 @@ class GoalAdmin(admin.ModelAdmin):
 
 @admin.register(System)
 class SystemAdmin(admin.ModelAdmin):
-    list_display = ('goal', 'name', 'measurable_data', 'measurable_unit', 'measurable_context')
+    list_display = ('goal', 'name', 'color', 'measurable_data', 'measurable_unit', 'measurable_context')
 
 
 @admin.register(Progress)
