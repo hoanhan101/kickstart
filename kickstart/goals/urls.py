@@ -4,5 +4,6 @@ from . import views
 
 app_name = "goals"
 urlpatterns = [
-    path('', views.goal_list, name='goal_list'),
+    path('', views.GoalListView.as_view() , name='goal_list'),
+    path("<int:id>/", views.GoalDetailView.as_view(), name="goal_detail"),
 ]

@@ -8,13 +8,11 @@
     <br>
     <h3>Goals determine your direction. Systems determine your progress.</h3>
     {% if payload|length < 1 %}
-    <div class="row">
-        <p class="text-secondary">You haven't created any goal yet!</p>
-    </div>
+        <p style="font-size: 20px;" class="text-secondary">You haven't created any goal yet!</p>
     {% endif %}
 
     {% for g in payload %}
-        <p style="font-size: 20px;"><i class="fas fa-star"></i> Your goal is to <span class="badge badge-warning">{{ g.goal }}</span> <i class="fas fa-arrow-right"></i> Your system is to
+    <p style="font-size: 20px;"><i class="fas fa-star"></i> Your goal is to <a href="{% url 'goals:goal_detail' g.goal.id %}"><span class="badge badge-warning">{{ g.goal }}</span></a> <i class="fas fa-arrow-right"></i> Your system is to
 
         {% if g.systems|length < 1 %}
             <span style="background-color: {{ g.systems.0.system.color }}" class="badge badge-warning">Click to define</span>
