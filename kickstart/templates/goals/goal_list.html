@@ -34,8 +34,10 @@
     {% endfor %}
 
     <br>
-    <h3>Try not to break the chain.</h3>
-    <h4>Calendar View</h4>
+    <h3>For each day that you make a progress, put it in the calendar.</h3>
+    <p style="font-size: 20px;"><i class="fas fa-star"></i> After a few days you'll have a chain. </p>
+    <p style="font-size: 20px;"><i class="fas fa-star"></i> You'll like seeing that chain, especially when you get a few weeks under your belt. </p>
+    <p style="font-size: 20px;"><i class="fas fa-star"></i> Your only job is to not break the chain. </p>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
@@ -84,7 +86,11 @@
     <div id='calendar'></div>
 
     <br>
-    <h4>Chart View</h4>
+    <h3> Use concrete numbers to see if you are getting better or worse. </h3>
+    <p style="font-size: 20px;"><i class="fas fa-star"></i> Start with a version that is incredibly easy for you. </p>
+    <p style="font-size: 20px;"><i class="fas fa-star"></i> Try to increase it each day, but in an incredibly small way. </p>
+    <p style="font-size: 20px;"><i class="fas fa-star"></i> Getting 1% better each day results in 37 times better by the end of the year. </p>
+    <br>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var ctx = document.getElementById('myChart').getContext('2d');
@@ -131,6 +137,6 @@
         });
     </script>
     <canvas id="myChart"></canvas>
-
+    <br>
 
 {% endblock content %}
