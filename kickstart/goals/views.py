@@ -1,11 +1,13 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.views.generic import View, DetailView
+from django.urls import reverse
+from django.views import generic
 
 
 from . import models
 
 
-class GoalListView(View):
+class GoalListView(LoginRequiredMixin, generic.View):
 
     def get(self, request):
         user = request.user
@@ -33,9 +35,23 @@ class GoalListView(View):
         return render(request, '404.html')
 
 
-class GoalDetailView(DetailView):
+class GoalDetailView(LoginRequiredMixin, generic.DetailView):
 
     model = models.Goal
     slug_field = "id"
     slug_url_kwarg = "id"
     template_name = 'goals/goal_detail.html'
+
+
+class GoalCreateView(LoginRequiredMixin, generic.CreateView):
+
+    model = models.Goal
+    fields = ['name', 'pain_level']
+    template_name = 'goals/goal_create.html'
+
+    def get_success_url(self):
+        return reverse('goals:goal_list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)

@@ -66,9 +66,7 @@
                   Create
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="{% url 'users:detail' request.user.username  %}">Goal</a>
-                  <a class="dropdown-item" href="{% url 'users:detail' request.user.username  %}">System</a>
-                  <a class="dropdown-item" href="{% url 'users:detail' request.user.username  %}">Progress</a>
+                  <a class="dropdown-item" href="{% url 'goals:goal_create' %}">Goal</a>
                 </div>
               </div>
               <div class="dropdown">

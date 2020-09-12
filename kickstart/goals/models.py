@@ -5,8 +5,8 @@ from django.db import models
 class Goal(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_of')
     name = models.CharField(max_length=200)
-    is_completed = models.BooleanField()
     pain_level = models.TextField(null=True, blank=True)
+    is_completed = models.BooleanField(blank=True, default=False)
 
     class Meta:
         verbose_name = 'Goal'
@@ -88,7 +88,7 @@ class System(models.Model):
 class Progress(models.Model):
     system = models.ForeignKey(System, on_delete=models.CASCADE, related_name='system_of')
     date = models.DateField()
-    is_completed = models.BooleanField()
+    is_completed = models.BooleanField(default=True)
     measurable_data = models.PositiveIntegerField(null=True, blank=True)
     measurable_context = models.TextField(null=True, blank=True)
 
