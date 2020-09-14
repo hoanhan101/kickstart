@@ -12,6 +12,7 @@
 <div class="row">
   <div class="col-sm-12">
     <a class="btn btn-primary" href="{% url 'goals:goal_update' object.id %}" role="button">Update</a>
+    <a class="btn btn-danger" href="{% url 'goals:goal_delete' object.id %}" role="button">Delete</a>
   </div>
 </div>
 {% endblock content %}

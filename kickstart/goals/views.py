@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse
@@ -51,6 +52,9 @@ class GoalCreateView(LoginRequiredMixin, generic.CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        messages.add_message(
+            self.request, messages.SUCCESS, 'Created successfully'
+        )
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -67,3 +71,20 @@ class GoalUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_success_url(self):
         return reverse('goals:goal_detail', kwargs=self.kwargs)
+
+    def form_valid(self, form):
+        messages.add_message(
+            self.request, messages.SUCCESS, 'Updated successfully'
+        )
+        return super().form_valid(form)
+
+
+class GoalDeleteView(LoginRequiredMixin, generic.DeleteView):
+
+    model = models.Goal
+    slug_field = "id"
+    slug_url_kwarg = "id"
+    template_name = 'goals/goal_delete.html'
+
+    def get_success_url(self):
+        return reverse('goals:goal_list')

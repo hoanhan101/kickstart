@@ -8,4 +8,5 @@ urlpatterns = [
     path("goal/<int:id>/", views.GoalDetailView.as_view(), name="goal_detail"),
     path("goal/create/", views.GoalCreateView.as_view(), name="goal_create"),
     path("goal/update/<int:id>/", views.GoalUpdateView.as_view(), name="goal_update"),
+    path("goal/delete/<int:id>/", views.GoalDeleteView.as_view(), name="goal_delete"),
 ]
