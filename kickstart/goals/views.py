@@ -49,9 +49,21 @@ class GoalCreateView(LoginRequiredMixin, generic.CreateView):
     fields = ['name', 'pain_level']
     template_name = 'goals/goal_create.html'
 
-    def get_success_url(self):
-        return reverse('goals:goal_list')
-
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('goals:goal_list')
+
+
+class GoalUpdateView(LoginRequiredMixin, generic.UpdateView):
+
+    model = models.Goal
+    slug_field = 'id'
+    slug_url_kwarg = 'id'
+    fields = ['name', 'pain_level', 'is_completed']
+    template_name = 'goals/goal_update.html'
+
+    def get_success_url(self):
+        return reverse('goals:goal_detail', kwargs=self.kwargs)

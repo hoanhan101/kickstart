@@ -5,6 +5,13 @@
 <div class="row">
     <div class="col-sm-12">
         <h2>{{ object.name }}</h2>
+        <p>{{ object.pain_level }}</p>
     </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <a class="btn btn-primary" href="{% url 'goals:goal_update' object.id %}" role="button">Update</a>
+  </div>
 </div>
 {% endblock content %}
