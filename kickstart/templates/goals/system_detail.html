@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+<br>
 <div class="row">
     <div class="col-sm-12">
         <h2>{{ object.name }}</h2>
@@ -16,6 +17,7 @@
   <div class="col-sm-12">
     <a class="btn btn-primary" href="{% url 'goals:system_update' object.id %}" role="button">Update</a>
     <a class="btn btn-danger" href="{% url 'goals:system_delete' object.id %}" role="button">Delete</a>
+    <a class="btn btn-success" href="{% url 'goals:progress_create' %}" role="button">Check-in</a>
   </div>
 </div>
 {% endblock content %}

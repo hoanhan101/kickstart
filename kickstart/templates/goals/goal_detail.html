@@ -2,10 +2,15 @@
 {% load static %}
 
 {% block content %}
+<br>
 <div class="row">
     <div class="col-sm-12">
-        <h2>{{ object.name }}</h2>
-        <p>{{ object.pain_level }}</p>
+        <h3>What do you want to achieve?</h3>
+        <p class="font-size-20px">{{ object.name }}</p>
+        <h3>What kind of pain do you want?</h3>
+        <p class="font-size-20px">{{ object.pain_level }}</p>
+        <h3>Completed?</h3>
+        <p class="font-size-20px">{{ object.is_completed }}</p>
     </div>
 </div>
 
@@ -13,7 +18,7 @@
   <div class="col-sm-12">
     <a class="btn btn-primary" href="{% url 'goals:goal_update' object.id %}" role="button">Update</a>
     <a class="btn btn-danger" href="{% url 'goals:goal_delete' object.id %}" role="button">Delete</a>
-    <a class="btn btn-success" href="{% url 'goals:system_create' %}?goal={{ object }}" role="button">Create a system</a>
+    <a class="btn btn-success" href="{% url 'goals:system_create' %}" role="button">Create a system</a>
   </div>
 </div>
 {% endblock content %}

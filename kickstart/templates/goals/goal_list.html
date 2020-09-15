@@ -8,38 +8,45 @@
     <br>
     <h3>Goals determine your direction. Systems determine your progress.</h3>
     {% if payload|length < 1 %}
-        <p style="font-size: 20px;" class="text-secondary">You haven't created any goal yet!</p>
+        <p class="font-size-20px text-secondary">You haven't created any goal yet!</p>
     {% endif %}
 
     {% for g in payload %}
-    <p style="font-size: 20px;"><i class="fas fa-star"></i> Your goal is to <a href="{% url 'goals:goal_detail' g.goal.id %}"><span class="badge badge-warning">{{ g.goal }}</span></a> <i class="fas fa-arrow-right"></i> Your system is to
+        <p class="font-size-20px">
+            {% if g.goal.is_completed %}
+                <i class="far fa-check-square"></i>
+            {% else %}
+                <i class="far fa-square"></i>
+            {% endif %}
 
-        {% if g.systems|length < 1 %}
-            <span style="background-color: {{ g.systems.0.system.color }}" class="badge badge-warning">Click to define</span>
-        {% endif %}
-
-        {% if g.systems|length == 1 %}
-            <a href="{% url 'goals:system_detail' g.systems.0.system.id %}">
-                <span style="background-color: {{ g.systems.0.system.color }}" class="badge badge-warning">{{ g.systems.0.system }}</span>
-            </a>
-        {% endif %}
-
-        {% if g.systems|length > 1 %}
-            {% for s in g.systems %}
-                <a href="{% url 'goals:system_detail' s.system.id %}">
-                    <span style="background-color: {{ s.system.color }}" class="badge badge-warning">{{ s.system }}</span>
+        Your goal is to <a href="{% url 'goals:goal_detail' g.goal.id %}"><span class="badge badge-warning">{{ g.goal }}</span></a> <i class="fas fa-arrow-right"></i> Your system is to
+            {% if g.systems|length < 1 %}
+                <a href="{% url 'goals:system_create' %}">
+                    <span style="background-color: {{ g.systems.0.system.color }}" class="badge badge-warning">Define it</span>
                 </a>
-            {% endfor %}
-        {% endif %}
+            {% endif %}
 
+            {% if g.systems|length == 1 %}
+                <a href="{% url 'goals:system_detail' g.systems.0.system.id %}">
+                    <span style="background-color: {{ g.systems.0.system.color }}" class="badge badge-warning">{{ g.systems.0.system }}</span>
+                </a>
+            {% endif %}
+
+            {% if g.systems|length > 1 %}
+                {% for s in g.systems %}
+                    <a href="{% url 'goals:system_detail' s.system.id %}">
+                        <span style="background-color: {{ s.system.color }}" class="badge badge-warning">{{ s.system }}</span>
+                    </a>
+                {% endfor %}
+            {% endif %}
         </p>
     {% endfor %}
 
     <br>
-    <h3>For each day that you make a progress, put it in the calendar.</h3>
-    <p style="font-size: 20px;"><i class="fas fa-star"></i> After a few days you'll have a chain. </p>
-    <p style="font-size: 20px;"><i class="fas fa-star"></i> You'll like seeing that chain, especially when you get a few weeks under your belt. </p>
-    <p style="font-size: 20px;"><i class="fas fa-star"></i> Your only job is to not break the chain. </p>
+    <h3>For each day that you make a progress, <a href="{% url 'goals:progress_create' %}">record it.</a></h3>
+    <p class="font-size-20px"><i class="fas fa-info-circle"></i> After a few days you'll have a chain. </p>
+    <p class="font-size-20px"><i class="fas fa-info-circle"></i> You'll like seeing that chain, especially when you get a few weeks under your belt. </p>
+    <p class="font-size-20px"><i class="fas fa-info-circle"></i> Your only job is to not break the chain. </p>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
@@ -90,10 +97,10 @@
     <div id='calendar'></div>
 
     <br>
-    <h3> Use numbers to check if you are getting better. </h3>
-    <p style="font-size: 20px;"><i class="fas fa-star"></i> Start with a version that is incredibly easy for you. </p>
-    <p style="font-size: 20px;"><i class="fas fa-star"></i> Try to increase it each day, but in an incredibly small way. </p>
-    <p style="font-size: 20px;"><i class="fas fa-star"></i> Getting 1% better each day results in 37 times better by the end of the year. </p>
+    <h3> Use numbers to measure if you are getting better. </h3>
+    <p class="font-size-20px"><i class="fas fa-info-circle"></i> Start with a version that is incredibly easy for you. </p>
+    <p class="font-size-20px"><i class="fas fa-info-circle"></i> Try to increase it each day, but in an incredibly small way. </p>
+    <p class="font-size-20px"><i class="fas fa-info-circle"></i> Getting 1% better each day results in 37 times better by the end of the year. </p>
     <br>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
