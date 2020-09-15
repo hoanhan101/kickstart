@@ -19,12 +19,16 @@
         {% endif %}
 
         {% if g.systems|length == 1 %}
-            <span style="background-color: {{ g.systems.0.system.color }}" class="badge badge-warning">{{ g.systems.0.system }}</span>
+            <a href="{% url 'goals:system_detail' g.systems.0.system.id %}">
+                <span style="background-color: {{ g.systems.0.system.color }}" class="badge badge-warning">{{ g.systems.0.system }}</span>
+            </a>
         {% endif %}
 
         {% if g.systems|length > 1 %}
             {% for s in g.systems %}
-                <span style="background-color: {{ s.system.color }}" class="badge badge-warning">{{ s.system }}</span>
+                <a href="{% url 'goals:system_detail' s.system.id %}">
+                    <span style="background-color: {{ s.system.color }}" class="badge badge-warning">{{ s.system }}</span>
+                </a>
             {% endfor %}
         {% endif %}
 

@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.views import generic
 
 
-from . import models
+from .models import Goal, System, Progress
 
 
 class GoalListView(LoginRequiredMixin, generic.View):
@@ -15,13 +15,13 @@ class GoalListView(LoginRequiredMixin, generic.View):
         if user.is_authenticated:
             payload = []
 
-            goals = models.Goal.objects.filter(user=user)
+            goals = Goal.objects.filter(user=user)
             for goal in goals:
-                systems = models.System.objects.filter(goal=goal)
+                systems = System.objects.filter(goal=goal)
 
                 sys = []
                 for system in systems:
-                    progress = models.Progress.objects.filter(system=system)
+                    progress = Progress.objects.filter(system=system)
                     sys.append({
                         'system': system,
                         'progress': progress
@@ -38,15 +38,15 @@ class GoalListView(LoginRequiredMixin, generic.View):
 
 class GoalDetailView(LoginRequiredMixin, generic.DetailView):
 
-    model = models.Goal
-    slug_field = "id"
-    slug_url_kwarg = "id"
+    model = Goal
+    slug_field = 'id'
+    slug_url_kwarg = 'id'
     template_name = 'goals/goal_detail.html'
 
 
 class GoalCreateView(LoginRequiredMixin, generic.CreateView):
 
-    model = models.Goal
+    model = Goal
     fields = ['name', 'pain_level']
     template_name = 'goals/goal_create.html'
 
@@ -63,7 +63,7 @@ class GoalCreateView(LoginRequiredMixin, generic.CreateView):
 
 class GoalUpdateView(LoginRequiredMixin, generic.UpdateView):
 
-    model = models.Goal
+    model = Goal
     slug_field = 'id'
     slug_url_kwarg = 'id'
     fields = ['name', 'pain_level', 'is_completed']
@@ -81,10 +81,68 @@ class GoalUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 class GoalDeleteView(LoginRequiredMixin, generic.DeleteView):
 
-    model = models.Goal
-    slug_field = "id"
-    slug_url_kwarg = "id"
+    model = Goal
+    slug_field = 'id'
+    slug_url_kwarg = 'id'
     template_name = 'goals/goal_delete.html'
+
+    def get_success_url(self):
+        return reverse('goals:goal_list')
+
+
+class SystemDetailView(LoginRequiredMixin, generic.DetailView):
+
+    model = System
+    slug_field = 'id'
+    slug_url_kwarg = 'id'
+    template_name = 'goals/system_detail.html'
+
+
+class SystemCreateView(LoginRequiredMixin, generic.CreateView):
+
+    model = System
+    fields = ['goal', 'name', 'color', 'measurable_data', 'measurable_unit', 'measurable_context']
+    template_name = 'goals/system_create.html'
+
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        form.fields['goal'].queryset = Goal.objects.filter(user=self.request.user)
+        return form
+
+    def form_valid(self, form):
+        messages.add_message(
+            self.request, messages.SUCCESS, 'Created successfully'
+        )
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('goals:goal_list')
+
+
+class SystemUpdateView(LoginRequiredMixin, generic.UpdateView):
+
+    model = System
+    slug_field = 'id'
+    slug_url_kwarg = 'id'
+    fields = ['name', 'color', 'measurable_data', 'measurable_unit', 'measurable_context']
+    template_name = 'goals/system_update.html'
+
+    def get_success_url(self):
+        return reverse('goals:system_detail', kwargs=self.kwargs)
+
+    def form_valid(self, form):
+        messages.add_message(
+            self.request, messages.SUCCESS, 'Updated successfully'
+        )
+        return super().form_valid(form)
+
+
+class SystemDeleteView(LoginRequiredMixin, generic.DeleteView):
+
+    model = System
+    slug_field = 'id'
+    slug_url_kwarg = 'id'
+    template_name = 'goals/system_delete.html'
 
     def get_success_url(self):
         return reverse('goals:goal_list')

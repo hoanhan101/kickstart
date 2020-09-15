@@ -38,16 +38,13 @@ class System(models.Model):
     STEEL = '#4682B4'
     AZURE = '#0080FE'
     CAROLINA = '#57A0D2'
-    SPACE = '#1C2951'
-    COFFEE = '#4B3619'
-    ESPRESSO = '#4B382A'
 
     COLOR_CHOICES = [
         (CHILI, 'Chili'),
         (RUBY, 'Ruby'),
         (MULBERRY, 'Mulberry'),
         (LILAC, 'Lilac'),
-        (PUNCH, 'PUNCH'),
+        (PUNCH, 'Punch'),
         (FRENCH_ROSE, 'French Rose'),
         (LOLLIPOP, 'Lollipop'),
         (PLUM, 'Plum'),
@@ -57,7 +54,6 @@ class System(models.Model):
         (HONEY, 'Honey'),
         (LEMON, 'Lemon'),
         (MINT, 'Mint'),
-        (MINT, 'Mint'),
         (SEA, 'Sea'),
         (FERN, 'Fern'),
         (JUNGLE, 'Jungle'),
@@ -65,9 +61,6 @@ class System(models.Model):
         (STEEL, 'Steel'),
         (AZURE, 'Azure'),
         (CAROLINA, 'Carolina'),
-        (SPACE, 'Space'),
-        (COFFEE, 'Coffee'),
-        (ESPRESSO, 'Espresso'),
     ]
 
     goal = models.ForeignKey(Goal, on_delete=models.CASCADE, related_name='goal_of')
