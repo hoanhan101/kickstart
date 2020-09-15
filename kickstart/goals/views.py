@@ -186,6 +186,11 @@ class ProgressUpdateView(LoginRequiredMixin, generic.UpdateView):
     fields = ['date', 'is_completed', 'measurable_data', 'measurable_context']
     template_name = 'goals/progress_update.html'
 
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        form.fields['date'].widget = forms.widgets.DateInput(attrs={'type': 'date'})
+        return form
+
     def get_success_url(self):
         return reverse('goals:progress_detail', kwargs=self.kwargs)
 
