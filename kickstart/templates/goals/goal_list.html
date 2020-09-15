@@ -64,6 +64,7 @@
                                         start: '{{ p.date|safe }}',
                                         end: '{{ p.date|safe }}',
                                         color: '{{ p.system.color|safe }}',
+                                        url: '{% url 'goals:progress_detail' p.id %}',
                                     },
                                 {% else %}
                                     {
@@ -75,6 +76,7 @@
                                         start: '{{ p.date|safe }}',
                                         end: '{{ p.date|safe }}',
                                         color: '#6c757d',
+                                        url: '{% url 'goals:progress_detail' p.id %}',
                                     },
                                 {% endif %}
                             {% endfor %}

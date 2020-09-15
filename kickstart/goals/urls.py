@@ -14,4 +14,9 @@ urlpatterns = [
     path('system/create/', views.SystemCreateView.as_view(), name='system_create'),
     path('system/update/<int:id>/', views.SystemUpdateView.as_view(), name='system_update'),
     path('system/delete/<int:id>/', views.SystemDeleteView.as_view(), name='system_delete'),
+
+    path('progress/<int:id>/', views.ProgressDetailView.as_view(), name='progress_detail'),
+    path('progress/create/', views.ProgressCreateView.as_view(), name='progress_create'),
+    path('progress/update/<int:id>/', views.ProgressUpdateView.as_view(), name='progress_update'),
+    path('progress/delete/<int:id>/', views.ProgressDeleteView.as_view(), name='progress_delete'),
 ]

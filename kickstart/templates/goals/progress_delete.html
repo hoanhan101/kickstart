@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h3>Are you sure you want to delete?</h3>
+            <form class="form-horizontal" method="post" action="{% url 'goals:progress_delete' object.id %}">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+{% endblock %}

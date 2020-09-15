@@ -1,3 +1,4 @@
+from datetime import date
 from django.conf import settings
 from django.db import models
 
@@ -80,7 +81,7 @@ class System(models.Model):
 
 class Progress(models.Model):
     system = models.ForeignKey(System, on_delete=models.CASCADE, related_name='system_of')
-    date = models.DateField()
+    date = models.DateField(default=date.today)
     is_completed = models.BooleanField(default=True)
     measurable_data = models.PositiveIntegerField(null=True, blank=True)
     measurable_context = models.TextField(null=True, blank=True)
