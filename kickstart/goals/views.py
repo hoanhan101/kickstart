@@ -15,13 +15,13 @@ class GoalListView(LoginRequiredMixin, generic.View):
         if user.is_authenticated:
             payload = []
 
-            goals = Goal.objects.filter(user=user)
+            goals = Goal.objects.filter(user=user).order_by('id')
             for goal in goals:
-                systems = System.objects.filter(goal=goal)
+                systems = System.objects.filter(goal=goal).order_by('id')
 
                 sys = []
                 for system in systems:
-                    progress = Progress.objects.filter(system=system)
+                    progress = Progress.objects.filter(system=system).order_by('date')
                     sys.append({
                         'system': system,
                         'progress': progress

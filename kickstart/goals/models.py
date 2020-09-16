@@ -88,7 +88,7 @@ class System(models.Model):
     name = models.CharField(
         max_length=200,
         verbose_name='What is your system?',
-        help_text='If you’re a writer, your goal is to write a book. Your system is the writing schedule that you follow each week. If you’re a runner, your goal is to run a marathon. Your system is your training schedule for the month.', # noqa
+        help_text='If your goal is to get in shape, your system is to eat healthy everyday and exercise 3 times a week. If your goal is to write a 300-page book by the end of this month, your system is to write 10 pages a day.', # noqa
     )
     color = models.CharField(
         max_length=7,

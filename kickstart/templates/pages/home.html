@@ -1,5 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Welcome home</h1>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <h1>The Best Way to Set Goals You Actually Follow And Achieve Them Consistently</h1>
+            <p class="font-size-20px">Inspired by <a href="https://jamesclear.com/goal-setting">James Clear's Proven Goal Setting Method</a>, <b>Motion</b> helps you set better goals using 3 main strategies:</p>
+            <p class="font-size-20px"><b>(1)</b> Beside <i>“What do you want to achieve?”</i>, it's worthwhile to figure out <i>“What kind of pain do you want?”</i> or <i>"What sacrifices do you need to take in order to achieve your goal"?</i></p>
+            <img src="../static/images/1_pain.png" class="img-fluid" alt="What is your pain level?">
+            <p class="font-size-20px"><b>(2)</b> Instead of focusing on goal setting alone, focus on designing a good system. </p>
+            <img src="../static/images/2_system.png" class="img-fluid" alt="Goals vs Systems">
+            <p class="font-size-20px"><b>(3)</b> Only through numbers and clear tracking that we have any idea if we are making progress and getting better. </p>
+            <img src="../static/images/3_checkin.png" class="img-fluid" alt="Checkin on calendar">
+            <br><br>
+            <img src="../static/images/4_measure.png" class="img-fluid" alt="Progress on chart">
+            <br><br>
+            <p class="font-size-20px">That's it. Super simple yet super effective!</p>
+            <div class="text-center">
+                <a href="{% url 'account_login' %}" class="btn btn-warning btn-lg" role="button"><b>Give Motion a Try →</b></a>
+            </div>
+            <br><br>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+
 {% endblock content %}
