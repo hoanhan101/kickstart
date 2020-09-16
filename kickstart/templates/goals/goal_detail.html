@@ -7,10 +7,20 @@
     <div class="col-sm-12">
         <h3>What do you want to achieve?</h3>
         <p class="font-size-20px">{{ object.name }}</p>
+
         <h3>What kind of pain do you want?</h3>
-        <p class="font-size-20px">{{ object.pain_level }}</p>
-        <h3>Completed?</h3>
-        <p class="font-size-20px">{{ object.is_completed }}</p>
+        {% if object.pain_level|length %}
+            <p class="font-size-20px">{{ object.pain_level }}</p>
+        {% else %}
+            <p class="font-size-20px">You haven't defined one yet!</p>
+        {% endif %}
+
+        <h3>Did you complete it?</h3>
+        {% if object.is_completed %}
+            <p class="font-size-20px">Yes</p>
+        {% else %}
+            <p class="font-size-20px">Not yet!</p>
+        {% endif %}
     </div>
 </div>
 

@@ -124,7 +124,7 @@ class SystemUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = System
     slug_field = 'id'
     slug_url_kwarg = 'id'
-    fields = ['name', 'color', 'measurable_data', 'measurable_unit', 'measurable_context']
+    fields = ['name', 'color', 'measurable_data', 'measurable_unit', 'measurable_context', 'is_completed']
     template_name = 'goals/system_update.html'
 
     def get_success_url(self):

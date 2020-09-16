@@ -5,10 +5,29 @@
 <br>
 <div class="row">
     <div class="col-sm-12">
-        <h2>{{ object.date }}</h2>
-        <p>{{ object.is_completed }}</p>
-        <p>{{ object.measurable_data }}</p>
-        <p>{{ object.measurable_context }}</p>
+        <h3>What is your check-in date?</h3>
+        <p class="font-size-20px">{{ object.date }}</p>
+
+        <h3>Did you complete it?</h3>
+        {% if object.is_completed %}
+            <p class="font-size-20px">Yes</p>
+        {% else %}
+            <p class="font-size-20px">Not yet!</p>
+        {% endif %}
+
+        <h3>What was the actual number?</h3>
+        {% if object.measurable_data > 0 %}
+            <p class="font-size-20px">{{ object.measurable_data }}</p>
+        {% else %}
+            <p class="font-size-20px">You haven't defined one yet!</p>
+        {% endif %}
+
+        <h3>Anything else you want to reflect on?</h3>
+        {% if object.measurable_context %}
+            <p class="font-size-20px">{{ object.measurable_context }}</p>
+        {% else %}
+            <p class="font-size-20px">Nothing!</p>
+        {% endif %}
     </div>
 </div>
 

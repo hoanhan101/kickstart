@@ -5,11 +5,35 @@
 <br>
 <div class="row">
     <div class="col-sm-12">
-        <h2>{{ object.name }}</h2>
-        <p>{{ object.goal }}</p>
-        <p>{{ object.measurable_data }}</p>
-        <p>{{ object.measurable_unit }}</p>
-        <p>{{ object.measurable_context }}</p>
+        <h3>What do you want to achieve?</h3>
+        <p class="font-size-20px">{{ object.goal.name }}</p>
+
+        <h3>What is your system?</h3>
+        <p class="font-size-20px">{{ object.name }}</p>
+
+        <h3>What color do you want?</h3>
+        <p class="font-size-20px" style="color: {{ object.color }}"><i class="fas fa-tint"></i></p>
+
+        <h3>What is the minimum threshold you want to hit?</h3>
+        {% if object.measurable_unit|length %}
+            <p class="font-size-20px">{{ object.measurable_data }} {{ object.measurable_unit }}</p>
+        {% else %}
+            <p class="font-size-20px">You haven't defined one yet!</p>
+        {% endif %}
+
+        <h3>Anything else you want to remind yourself?</h3>
+        {% if object.measurable_context|length %}
+            <p class="font-size-20px">{{ object.measurable_context}}</p>
+        {% else %}
+            <p class="font-size-20px">Nothing!</p>
+        {% endif %}
+
+        <h3>Did you complete it?</h3>
+        {% if object.is_completed %}
+            <p class="font-size-20px">Yes</p>
+        {% else %}
+            <p class="font-size-20px">Not yet!</p>
+        {% endif %}
     </div>
 </div>
 

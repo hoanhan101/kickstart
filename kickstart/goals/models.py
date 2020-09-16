@@ -116,6 +116,11 @@ class System(models.Model):
         verbose_name='Anything else you want to remind yourself?',
         help_text='What are the things that you want to avoid at all cost until you have succeeded? Do you have a specific plan for when, where, and how you will perform the behavior?', # noqa
     )
+    is_completed = models.BooleanField(
+        blank=True,
+        default=False,
+        verbose_name='Did you complete it?',
+    )
 
     class Meta:
         verbose_name = 'System'
@@ -147,7 +152,7 @@ class Progress(models.Model):
     measurable_context = models.TextField(
         null=True,
         blank=True,
-        verbose_name='Anything else you want to reflect?',
+        verbose_name='Anything else you want to reflect on?',
         help_text='What was a highlight today? Was there anything challenging? What are you looking forward to? What needs growth and nurturing?', # noqa
     )
 
