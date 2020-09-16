@@ -4,7 +4,7 @@ from .base import env
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = True
+DEBUG = False
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env(
     "DJANGO_SECRET_KEY",
@@ -29,6 +29,11 @@ CACHES = {
 EMAIL_HOST = env("EMAIL_HOST", default="mailhog")
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-port
 EMAIL_PORT = 1025
+
+# WhiteNoise
+# ------------------------------------------------------------------------------
+# http://whitenoise.evans.io/en/latest/django.html#using-whitenoise-in-development
+INSTALLED_APPS = ["whitenoise.runserver_nostatic"] + INSTALLED_APPS  # noqa F405
 
 # django-debug-toolbar
 # ------------------------------------------------------------------------------

@@ -1,9 +1,12 @@
 COMPOSE_FILE := local.yml
 
 
-.PHONY: deploy docker lint migrate test help
+.PHONY: collectstatic deploy docker lint migrate test help
 .DEFAULT_GOAL := help
 
+
+collectstatic: docker  ## Collect statics
+	docker-compose -f ${COMPOSE_FILE} run --rm django python manage.py collectstatic
 
 docker:  ## Build a local docker image
 	docker-compose -f ${COMPOSE_FILE} build
